@@ -1,0 +1,88 @@
+  .btn-center {
+    display:block;
+    margin:0 auto;
+   }
+
+   .flex-container {
+    display: flex;
+    flex-wrap: nowrap;
+    /* background-color: DodgerBlue; */
+  }
+
+  .img_container {
+    margin-left:450px;
+  }
+
+  .ng-autocomplete {
+    width:100%;
+    max-width: 600px;
+    display: table;
+    margin: 0 auto;
+  }
+  .flex-container {
+    display: flex;
+    flex-wrap: nowrap;
+    /* background-color: DodgerBlue; */
+  }
+
+  .btn-color {
+    background-color: rgb(90, 88, 247);
+  }
+
+  .btn-margin {
+    margin-left: 510px;
+  }
+
+  .btn-rad {
+    border-radius: 5px;
+    margin-left: 137px;
+  }
+
+  .field_color {
+   /* color: rgb(255, 196, 2); */
+   color: black;
+   
+  }
+
+  .field_margin {
+    margin-left: 16px;
+} 
+ 
+table.my-table {
+  border: none;
+  border-collapse: collapse;
+  width: 100%;
+  text-align: center;
+}
+
+thead.my-table.headers tr th {
+  border: white solid 3px;
+  background-color: darkblue;
+  color: white;
+  height: 40px;
+  font-family: Lato;
+}
+
+  
+tbody.my-table.body tr td {
+  border: black solid 1px;
+  border-left: none;
+  height: 25px;
+}
+
+tbody.my-table.body tr td.last {
+  border-right: none;
+}
+
+tbody.my-table.body tr.active {
+  background-color: gainsboro;
+  cursor: pointer;
+}
+
+.font {
+  font-family: Lato;
+}
+
+.head_color {
+  color: blue;
+}

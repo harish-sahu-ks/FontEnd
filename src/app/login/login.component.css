@@ -1,0 +1,52 @@
+.field-color{
+  
+     color:  rgb(68, 21, 21);
+
+}
+
+.login_color {
+    color: white;
+}
+
+.login_color:hover{
+    color: blue;
+}
+.txt_black{
+    color: black;
+}
+
+.txt_color{
+    color:black;
+}
+
+.txt_color:hover:hover {
+    color:whitesmoke;
+}
+
+.txt_white {
+    color:blue;
+}
+
+.txt_white:hover{
+    color: purple;
+}
+
+.field_name {
+   color: rgb(255, 196, 2);
+}
+
+.bg-color {
+    height: 650 px;  
+    color: #fff;
+    background-image:url("../../assets/img/CMRT_Pic1.jpg"); 
+    background-size: 100% ;  
+    background-size: cover;
+}
+
+.field_margin {
+    margin-left: 200px;
+}
+
+.font {
+    font-family: Lato;
+  }

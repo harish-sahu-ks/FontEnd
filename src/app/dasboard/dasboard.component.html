@@ -1,0 +1,165 @@
+<div class="font">
+  <nav-root></nav-root>
+<h2 class="field_margin font head_color">Dashboard</h2>
+<div class="col-12 col-md-12">
+    <div>
+      <table class="my-table">
+        <thead class="my-table headers">
+          <tr>
+            <th class="field_color" style="width: 5%">Sr.No.</th>
+            <th class="field_color" style="width: 5%">Select</th>
+            <th class="field_color" style="width: 30%">CMRT File</th>
+            <th class="field_color" style="width: 10%">Date of Extraction</th>
+            <th class="field_color" style="width: 10%">Total File</th>
+            <th class="field_color" style="width: 10%">Total Row</th>
+            <th class="field_color" style="width: 10%">Consolidate File</th>
+            <th class="field_color" style="width: 10%">Result File</th>
+            <th class="field-color" style="width: 10%">Unique File</th>
+            
+           </tr>
+        </thead>
+        <tbody class="my-table body">
+            <tr *ngFor="let users of user">
+                <td>{{users.id}}</td>
+                <td>
+                  <mat-radio-group
+                   aria-labelledby="example-radio-group-label"
+                   class="example-radio-group"
+                   [(ngModel)]="radiosValue">
+                   <mat-radio-button class="example-radio-button" (click)="doSearchFieldVacant(users.id-1)" [value]="users.id-1">
+                   </mat-radio-button>
+                   </mat-radio-group>
+                </td>
+                <td>{{users.ZipFileName}}</td>
+                <td>{{users.Date}}</td>
+                <td>{{users.FileCount}}</td>
+                <td>{{users.RowCount}}</td>
+                <td>
+                  <div  class="example-button-row">
+                      <button mat-raised-button (click)="DownLoadConsolidateFile(users.id-1)">Download</button>
+                  </div>
+              </td>
+                <td>
+                    <div  class="example-button-row">
+                        <button mat-raised-button (click)="DownloadFile(users.id-1)" >Download</button>
+                    </div>
+                </td>
+                <td>
+                  <div  class="example-button-row">
+                      <button mat-raised-button (click)="DownLoadUniqueFile(users.id-1)">Download</button>
+                  </div>
+              </td>
+            </tr>
+        </tbody>
+      </table>
+      <!-- <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                 showFirstLastButtons
+                 aria-label="Select page of periodic elements">
+      </mat-paginator> -->
+    </div>
+</div>
+<br><br>
+    
+<div class="ng-autocomplete">
+  <ng-autocomplete
+    [data]="users"
+    [searchKeyword]="keyword"
+    placeholder="Search Smelter Id"
+    (selected)='selectEvent($event)'
+    (inputChanged)='onChangeSearch($event)'
+    (inputFocused)='onFocused($event)'
+    historyIdentifier="users"
+    [itemTemplate]="itemTemplate"
+    [notFoundTemplate]="notFoundTemplate">
+  </ng-autocomplete>
+
+  <ng-template #itemTemplate let-item>
+    <span [innerHTML]="item.smeleterId"></span>
+    <!-- <span [innerHTML]="item.type"></span>&nbsp;|
+    <span [innerHTML]="item.RmiStatus"></span>&nbsp;|
+    <span [innerHTML]="item.SmelterRef"></span>&nbsp;|
+    <span [innerHTML]="item.Country"></span>&nbsp;|
+    <span [innerHTML]="item.Metal"></span> -->
+  </ng-template>
+
+  <ng-template #notFoundTemplate let-notFound>
+    <div [innerHTML]="notFound"></div>
+  </ng-template>
+  <!-- <span>
+     <button type="button" class="btn-color btn">Submit</button>
+  </span>   -->
+</div>
+
+<br>
+
+<form>
+    <div class="form-row field_margin">
+        <div class="form-group col-md-4">
+          <label class="field_color" for="smelter_id"><b>Smelter Id</b></label>
+          <input type="text" class="form-control" [readonly]="true" [(ngModel)]="smelter_id" id="smelterid" name="smelterid"  placeholder="smelter id.....">
+        </div> 
+        <div class="form-group col-md-4">
+          <label class="field_color" for="type"><b>Type</b></label>
+          <input type="text" class="form-control" [readonly]="true" [(ngModel)]="type" id="Type" name="Type" placeholder="type.....">
+        </div>
+        <div class="form-group col-md-4">
+          <label class="field_color" for="RMI_Status"><b>RMI Status</b></label>
+          <input type="text" class="form-control" [readonly]="true" [(ngModel)]="RMI_Status"  id="RMIStatus" name="RMIStatus" placeholder="RMI Status.....">
+        </div>
+      </div>
+    <div class="form-row field_margin">
+      <div class="form-group col-md-4">
+        <label class="field_color" for="smelter_ref"><b>Smelter Reference</b></label>
+        <input type="text" class="form-control" [readonly]="true" [(ngModel)]="smelter_ref" id="smelterref" name="smelterref" placeholder="smelter reference....">
+      </div>
+
+      <div class="form-group col-md-4">
+        <label class="field_color" for="metal"><b>Metal</b></label>
+        <input type="text" class="form-control" [readonly]="true" [(ngModel)]="metal" id="Metal" name="Metal" placeholder="metal.....">
+      </div>
+
+      <div class="form-group col-md-4">
+        <label class="field_color" for="country"><b>Country</b></label>
+        <input type="text" class="form-control" [readonly]="true" [(ngModel)]="country"  id="Country" name="Country" placeholder="country.....">
+      </div>
+
+    </div>
+</form> 
+<br>
+<div>
+<div class="flex-container">
+    <div class="field_margin">
+        <h2 class="font head_color">Selected Smelter ID are Associated with below Suppliers</h2>
+    </div>
+    <div class="img_container btn-margin">
+        <button type="button" class="btn-dark btn-rad" (click)="export_excel()">Download
+            <img src="assets/img/excel_icon.png" alt="">
+        </button>
+    </div>
+</div>
+<br>
+
+<div  class="col-12 col-md-12">
+    <div >
+      <table id="excel-table" class="my-table">
+        <thead class="my-table headers">
+          <tr>
+            <th class="field_color" style="width: 10%">Sr.No.</th>
+            <th class="field_color" style="width: 40%">Supplier Name</th>
+            <th class="field_color" style="width: 20%">Smelter Id</th>
+            <th class="field_color" style="width: 30%">Metal</th>
+          </tr>
+        </thead>
+        <tbody class="my-table body">
+            <tr *ngFor="let item of supplierList">
+                <td>{{item.Sr_No}}</td> 
+                <td>{{item.Smelter_Name}}</td>
+                <td>{{item.Smelter_Id_Number}}</td> 
+                <td>{{item.Metal}}</td>
+            </tr>
+        </tbody>
+      </table>
+    </div>
+</div>
+</div>
+

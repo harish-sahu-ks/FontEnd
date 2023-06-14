@@ -1,0 +1,16 @@
+.dialog_decoration {
+    
+}
+.Boundry_wall {
+    font-family: Lato;
+    width: 300px;
+    border: 15px solid green;
+    padding: 50px;
+    margin: 20px;
+    background-color: rgb(252, 231, 204);
+}
+
+.font{
+    font-family: Lato;
+}
+

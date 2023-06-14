@@ -1,0 +1,46 @@
+<nav-root></nav-root><br>
+<form action="/action_page.php">
+    <label for="uploadExcelFile" style="font-weight: bold; font-family: Lato;">File to upload : </label>&nbsp;
+    <input  type="file" id="uploadExcelFile" name="filename" (change)="changeUserDetailFile($event)">
+    <!-- <input class="button" type="submit"> -->
+    <button mat-raised-button class="font button" (click)="uploadfile()" [disabled]="isFileSelect">Submit</button> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+    <label for="uploadExcelFile" style="font-weight: bold; font-family: Lato;">Delete Checked Row : </label>&nbsp;&nbsp; &nbsp; 
+    <button mat-raised-button class="font button" (click)="deleteCheckedRow()" [disabled]="isChecked">Delete</button> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  
+    <label for="reInitiate" style="font-weight: bold; font-family: Lato;">Reinitiate Checked Row : </label>&nbsp;&nbsp; &nbsp; 
+    <button mat-raised-button class="font button">Reinitiate</button>  
+</form><br>
+
+<table class="my-table">
+    <thead class="my-table headers">
+      <tr>
+        <th  style="width: 10%"><input style="margin-top: 5px; width: 15px; height: 15px;" [(ngModel)]="isSelectAll" type="checkbox" [value]="-1" (change)="onChangeCheck($event)"></th>
+        <th  style="width: 5%">Sr.No.</th>
+        <th  style="width: 20%">Name</th>
+        <th  style="width: 25%">Company</th>
+        <th  style="width: 20%">Email</th>
+        <th  style="width: 10%">Status</th>
+        <th  style="width: 10%">Edit Email</th>
+      </tr>
+    </thead>
+    <tbody class="my-table body">
+        <tr *ngFor="let user of userlistFromdbs; let indexOfelement = index">
+          <!-- <td>  <mat-checkbox class="example-margin"></mat-checkbox></td> -->
+          <td>
+            <input class="" type="checkbox" [value]="user.Email" [checked]="user.Select" (change)="onChangeCheck($event)">
+          </td>
+          <td>{{user.Id}}</td>
+          <td>{{user.Name}}</td>
+          <td>{{user.Company}}</td>
+          <td>{{user.Email}}</td>
+          <td>{{user.Status}}</td>
+          <td> <div  class="example-button-row">
+            <button mat-raised-button class="font button"  (click)="openDialog(user.Id-1)">Edit</button>
+          </div></td>
+        </tr>
+    </tbody>
+</table>
+<mat-paginator class="bg_color" #paginator [length]="100" [pageSizeOptions]="[5,10]" aria-label="select page"></mat-paginator>
+<div>
+    <button mat-raised-button class="font button">Send</button>   
+</div>
+

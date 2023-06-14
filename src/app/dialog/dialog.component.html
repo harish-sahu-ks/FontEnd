@@ -1,0 +1,15 @@
+<div class="Boundry_wall">
+    <div class="dialog_decoration">
+        <h2 class="font"><strong>Change Email</strong></h2>
+        <div class="example-container">
+              <label><strong>Enter your email :</strong></label>
+              <input matInput placeholder="pat@example.com" [(ngModel)]="email" id="email" value="email" required> 
+              <!-- <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error> -->
+        
+          </div>
+        <div mat-dialog-actions>
+          <button mat-button mat-raised-button mat-dialog-close class="font" (click)="SendEmail()">OK</button>
+          <button mat-button mat-raised-button mat-dialog-close class="font">Close</button> 
+        </div>
+    </div>
+</div>
