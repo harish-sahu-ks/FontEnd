@@ -25,6 +25,8 @@ import { NavComponent } from './nav.component';
 import { UserDetailComponent } from './user_detail/user_detail.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { DialogComponent } from './dialog/dialog.component';
+import { TokenInterceptor } from './Interceptor/token.interceptor';
+
 
 
 @NgModule({
@@ -60,15 +62,17 @@ import { DialogComponent } from './dialog/dialog.component';
     MatPaginatorModule,
     MatTableModule,
     MatCheckboxModule,
-    MatPaginatorModule
-    
-    
-    
-    
+    MatPaginatorModule,
     
     
   ],
-  providers: [DatePipe],
+  providers: [DatePipe,
+    {
+    provide : HTTP_INTERCEPTORS,
+    useClass : TokenInterceptor,
+    multi : true
+  }
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

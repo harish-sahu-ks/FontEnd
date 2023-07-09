@@ -13,6 +13,8 @@ import { DatePipe } from '@angular/common';
 
     FileDataAndName:any = {"name":"", "date":""};
     ngOnInit(): void {
+
+  
       
     }
 
@@ -77,7 +79,7 @@ import { DatePipe } from '@angular/common';
       this.cmrtservice.filesAndDetail(this.formdata).subscribe(
         (response) => 
         { 
-          console.log("Success Response" + response);
+          console.log(response);
           this.inProgress=false; 
           this.showLabel = true;
           

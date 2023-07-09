@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CmrtService } from './cmrt.service';
 
 
 @Component({
@@ -9,6 +10,12 @@ import { Component, OnInit } from '@angular/core';
 
   export class NavComponent {
       
+    constructor(private cmrtservice:CmrtService){
+
+    }
+    logout(){
+      this.cmrtservice.Logout();
+    }
   }
   
   

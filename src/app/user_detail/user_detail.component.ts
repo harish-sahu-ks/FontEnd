@@ -18,12 +18,14 @@ export class UserDetailComponent implements OnInit {
   userList:any = []
   data: any;
   userlistFromdbs :any = [];
-  userpreviousData :any = [];
-  DisplayUserList : any = [];
+  dataSendInDatabase :any = [];
   index:any="";
   isChecked:boolean=true;
   isSelectAll:boolean=false;
   isFileSelect:boolean=true;
+  condition1:number = 0;
+  condition2:number = 0;
+  rowTobeDeleted:any=[];
   constructor( private cmrtservice:CmrtService,private route:ActivatedRoute, private dialog:MatDialog, private http:HttpClient, ){
 
   }
@@ -91,60 +93,53 @@ export class UserDetailComponent implements OnInit {
         // console.log(this.data)
         for(let i=0; i<this.data.length;i++){
           this.userList.push(this.data[i])
+          // console.log(this.userList)
         }
-
-        if(this.userpreviousData.length>0){
-              for(let i=0; i<this.userList.length;i++){
-                    for(let j=0; j<this.userpreviousData.length;j++){
-                        if(this.userList[i].Name==this.userpreviousData[j].Name){
-                             if(this.userList[i].Email != this.userpreviousData[j].Email){
-                                   this.DisplayUserList.push(
-                                    {
-                                      Id : i+1,
-                                      Compare : "Matched",
-                                      Name : this.userList[i].Name,
-                                      Company : this.userList[i].Company,
-                                      Email : this.userList[i].Email,
-                                      Status : this.userList[i].Status
-    
-                                    }
-                                   )
-                             }
-                        }else{
-                          this.DisplayUserList.push(
-                            {
-                              Id : i+1,
-                              Compare : "Not_Matched",
-                              Name : this.userList[i].Name,
-                              Company : this.userList[i].Company,
-                              Email : this.userList[i].Email,
-                              Status : this.userList[i].Status
-    
-                            }
-                           )
-                        }
-                    }
-              }
-           }else{
-            for(let i=0; i<this.userList.length;i++){
-              this.DisplayUserList.push(
-                {
-                  Id : i+1,
-                  Compare : "Not_Matched",
-                  Name : this.userList[i].Name,
-                  Company : this.userList[i].Company,
-                  Email : this.userList[i].Email,
-                  Status : this.userList[i].Status
-    
+        
+        if(this.userlistFromdbs.length>0){
+          for(let i=0; i<this.userList.length;i++){
+            for(let j=0; j<this.userlistFromdbs.length;j++){
+              console.log(this.userList[i].Company)
+              if(this.userList[i].Company == this.userlistFromdbs[j].Company && this.userList[i].Email == this.userlistFromdbs[j].Email){
+                      // Not to send in database
+                      console.log("1")
+                      break;
+              }else{
+                if(this.userList[i].Company == this.userlistFromdbs[j].Company && this.userList[i].Email != this.userlistFromdbs[j].Email){
+                    //  Run Delete Method (Delete Existing Data)
+                    // Store newData in dataSendInDatabase
+                    // this.dataSendInDatabase.push(this.userList[i])
+                    this.rowTobeDeleted.push(this.userlistFromdbs[j].Email)
+                    this.rowTobeDeletingWhileUploading();
+                    this.condition1=1;
+                    this.condition1++;
+                    console.log("2")
+                }else{
+                    // Store newData in dataSendInDatabase
+                    // this.dataSendInDatabase.push(this.userList[i])
+                    console.log("3")
+                    // console.log(this.dataSendInDatabase)
+                    this.condition2=1;
+                    this.condition2++; 
                 }
-                )
               }
-           }
-        console.log(this.userList[0].Name)
-       this.cmrtservice.postUserlistDetails(this.userList).subscribe({
+              
+            }
+            if(this.condition1>0){
+              this.dataSendInDatabase.push(this.userList[i])
+            }else if(this.condition1=0 && this.condition2>0){
+              this.dataSendInDatabase.push(this.userList[i])
+            }
+          }
+        }else{
+          for(let i=0; i<this.data.length;i++){
+            this.dataSendInDatabase.push(this.data[i])
+          }
+          console.log(this.dataSendInDatabase)
+        }
+       this.cmrtservice.postUserlistDetails(this.dataSendInDatabase).subscribe({
             next:(data:any)=>{
-              window.location.reload();
-              // Don't Delete
+              // ************************************Don't Delete***********************************************
               // console.log(data)
               // while(this.userList.length>0){
               //   this.userList.pop()
@@ -163,8 +158,7 @@ export class UserDetailComponent implements OnInit {
        })
       }
      
-          console.log(this.DisplayUserList)
-          console.log(this.userpreviousData)
+          
          this.isFileSelect=false;
         //  window.location.reload();
       }
@@ -239,4 +233,13 @@ export class UserDetailComponent implements OnInit {
   //  })
  }
 
+ rowTobeDeletingWhileUploading(){
+  this.cmrtservice.deleteuser(this.rowTobeDeleted).subscribe((response)=>{
+        window.location.reload();
+      })
+ }
+
+ SendMail(){
+  this.cmrtservice.sendEmail()
+ }
 }

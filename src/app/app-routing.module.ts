@@ -5,12 +5,14 @@ import { LoginComponent } from './login/login.component';
 import { HomeComponent} from './home.component';
 import {DasboardComponent} from './dasboard/dasboard.component'
 import { UserDetailComponent } from './user_detail/user_detail.component';
+import { AuthGuard } from './guard/auth.guard';
 
 
 const routes: Routes = [
   {
     path: 'home',
-    component: HomeComponent
+    component: HomeComponent,
+    canActivate: [AuthGuard]
 },
 // { path: '', component: AppComponent, canActivate: [AuthGuard] },
 
@@ -21,15 +23,18 @@ const routes: Routes = [
 },
 {
   path: 'login',
-  component: LoginComponent
+  component: LoginComponent,
+  // canActivate:[AuthGuard]
 },
 {
   path : 'dashboard',
-  component : DasboardComponent
+  component : DasboardComponent,
+  canActivate:[AuthGuard]
 },
 {
   path : 'user_details',
-  component : UserDetailComponent
+  component : UserDetailComponent,
+  canActivate:[AuthGuard]
 }
 ]
 
