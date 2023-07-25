@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { CmrtService } from './cmrt.service';
 import { DatePipe } from '@angular/common';
+import { environment } from './../../src/environment'
 @Component({
     selector: 'home-root',
     templateUrl: './home.component.html',
@@ -10,7 +11,7 @@ import { DatePipe } from '@angular/common';
   })
 
   export class HomeComponent implements OnInit {
-
+    urls = environment.apiUrl;
     FileDataAndName:any = {"name":"", "date":""};
     ngOnInit(): void {
 
@@ -79,14 +80,15 @@ import { DatePipe } from '@angular/common';
       this.cmrtservice.filesAndDetail(this.formdata).subscribe(
         (response) => 
         { 
-          console.log(response);
+          console.log(response + "h");
           this.inProgress=false; 
           this.showLabel = true;
           
         },
     (error) => 
     { 
-      console.log("Error happened" + error)
+      
+      // console.log("Error happened" + error)
       this.inProgress=false; 
       this.showLabel = true;
       
@@ -97,7 +99,7 @@ import { DatePipe } from '@angular/common';
       const ZipfileName :String = this.FileDataAndName.name;
       const Dateofupload = this.FileDataAndName.date;
       this.cmrtservice.saveFileNameAndDate( this.FileDataAndName.name,this.FileDataAndName.date);
-      let url = 'http://localhost:4000/postdateandNameofZipFile/' + this.FileDataAndName.name;
+      let url = `${this.urls}/postdateandNameofZipFile/` + this.FileDataAndName.name;
       this.http.post<any>(url,"").subscribe((response)=>{
              console.log(response);
       }),

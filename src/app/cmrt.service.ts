@@ -21,6 +21,10 @@ export class CmrtService {
     return var1;
 }
 
+mailReinitiate(data:any){
+ return this.http.post(`${this.urls}/reinitiateEmali`,data);
+}
+
 sendEmail(){
   this.http.post(`${this.urls}/initiateEmail`, '').subscribe((response)=>{
        console.log(response);

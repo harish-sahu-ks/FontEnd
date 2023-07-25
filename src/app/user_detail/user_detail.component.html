@@ -7,7 +7,7 @@
     <label for="uploadExcelFile" style="font-weight: bold; font-family: Lato;">Delete Checked Row : </label>&nbsp;&nbsp; &nbsp; 
     <button mat-raised-button class="font button" (click)="deleteCheckedRow()" [disabled]="isChecked">Delete</button> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  
     <label for="reInitiate" style="font-weight: bold; font-family: Lato;">Reinitiate Checked Row : </label>&nbsp;&nbsp; &nbsp; 
-    <button mat-raised-button class="font button">Reinitiate</button>  
+    <button mat-raised-button class="font button" (click)="mailResendTocheckedUser()" [disabled]="isChecked">Reinitiate</button>  
 </form><br>
 
 <table class="my-table">

@@ -7,12 +7,14 @@ import { HttpClient } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '../dialog/dialog.component';
 import { database } from 'ngx-bootstrap-icons';
+import { environment } from '../../../src/environment';
 @Component({
   selector: 'app-user_detail',
   templateUrl: './user_detail.component.html',
   styleUrls: ['./user_detail.component.css']
 })
 export class UserDetailComponent implements OnInit {
+  urls = environment.apiUrl;
   formData : FormData = new FormData();
   files1 : any = " ";
   userList:any = []
@@ -35,7 +37,7 @@ export class UserDetailComponent implements OnInit {
     //   console.log(userDetails.length + "h")
     // })
 
-    let url = 'http://localhost:4000/getuserDetailList';
+    let url = `${this.urls}/getuserDetailList`;
     this.http.get<any>(url).subscribe({
       next:data=>{
         while(this.userlistFromdbs.length>0){
@@ -160,7 +162,7 @@ export class UserDetailComponent implements OnInit {
      
           
          this.isFileSelect=false;
-        //  window.location.reload();
+         window.location.reload();
       }
    
 
@@ -242,4 +244,18 @@ export class UserDetailComponent implements OnInit {
  SendMail(){
   this.cmrtservice.sendEmail()
  }
+
+checkeduserList:any=[];
+mailResendTocheckedUser(){
+  for(let i=0;i<this.userlistFromdbs.length;i++){
+     if(this.userlistFromdbs[i].Select==true){
+        this.checkeduserList.push(this.userlistFromdbs[i].Email);
+     }
+  }
+  console.log(this.checkeduserList)
+  this.cmrtservice.mailReinitiate(this.checkeduserList).subscribe((response)=>{
+  })
+  window.location.reload();
+}
+
 }

@@ -27,6 +27,11 @@ const routes: Routes = [
   // canActivate:[AuthGuard]
 },
 {
+  path: 'login/:randomNumber',
+  component: LoginComponent,
+  // canActivate:[AuthGuard]
+},
+{
   path : 'dashboard',
   component : DasboardComponent,
   canActivate:[AuthGuard]

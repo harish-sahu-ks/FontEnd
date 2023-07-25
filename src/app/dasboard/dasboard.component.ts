@@ -14,7 +14,8 @@ import * as FileSaver from 'file-saver';
 // import * as Excel from "exceljs";
 import { Workbook } from 'exceljs'
 import { MatPaginator } from '@angular/material/paginator';
-import {MatTableDataSource} from '@angular/material/table'
+import {MatTableDataSource} from '@angular/material/table';
+import { environment } from '../../../src/environment'
 
 
 
@@ -27,6 +28,7 @@ import {MatTableDataSource} from '@angular/material/table'
 })
 
 export class DasboardComponent implements OnInit {
+  urls = environment.apiUrl;
   smelter_id : any = "";
   type : any = "";
   smelter_ref : any = "";
@@ -97,7 +99,7 @@ export class DasboardComponent implements OnInit {
     this.dataSource.paginator = this.paginator
 
     this.cmrtservice.getfileNameDate();
-    let url1 = 'http://localhost:4000/detailOfUploadedFileConsolidatedFileResultFile';
+    let url1 = `${this.urls}/detailOfUploadedFileConsolidatedFileResultFile`;
     this.http.get<any>(url1).subscribe({
       next:data=>{
         while(this.user.length>0){
@@ -120,7 +122,7 @@ export class DasboardComponent implements OnInit {
     // console.log(this.array_Date_Name[0].file_name)
 
 
-    let urlNew = 'http://localhost:4000/getCIDNumberAndDetails';
+    let urlNew = `${this.urls}/getCIDNumberAndDetails`;
     
    this.http.get<any>(urlNew).subscribe({
       next:Allfiledata=>{
@@ -154,7 +156,7 @@ constructor(private dialog:MatDialog, private cmrtservice:CmrtService,private ro
 
 
 getResultFileData(){
-  let urlNew = 'http://localhost:4000/getResultFileData'
+  let urlNew = `${this.urls}/getResultFileData`
   this.http.get<any>(urlNew).subscribe({
      next:AllfileData=>{
       while(this.resultExcelData.length>0){
@@ -193,17 +195,20 @@ getResultFileData(){
   })
  
 }
-
+ binaryData:any = [];
  DownLoadUniqueFile(id:any){
+  while(this.binaryData.length>0){
+    this.binaryData.pop();
+  }
   let resultUniqueNumber = this.resultUniqueArray[id];
   this.cmrtservice.downloadUniqueResultFile(resultUniqueNumber).subscribe((response: any)=>{
-    const filename ="ResultUniqueFile.xlsx"; 
+    const filename ="Unique_File.xlsx"; 
     let dataType = response.type;
-    let binaryData = [];
-    binaryData.push(response);
-    console.log(binaryData)
+    this.binaryData = [];
+    this.binaryData.push(response);
+    console.log(this.binaryData)
     let downloadLink = document.createElement('a');
-    downloadLink.href = window.URL.createObjectURL(new Blob(binaryData, {type: dataType}));
+    downloadLink.href = window.URL.createObjectURL(new Blob(this.binaryData, {type: dataType}));
     if (filename)
         downloadLink.setAttribute('download', filename);
     document.body.appendChild(downloadLink);
@@ -215,7 +220,7 @@ getResultFileData(){
   DownloadFile(id:any){
     let resultUniqueNumber = this.resultUniqueArray[id];
   this.cmrtservice.downloadResultFileinDasboard(resultUniqueNumber).subscribe((response: any)=>{
-    const filename ="ResultFile.xlsx"; 
+    const filename ="Result_File.xlsx"; 
     let dataType = response.type;
     let binaryData = [];
     binaryData.push(response);
@@ -233,7 +238,7 @@ getResultFileData(){
  DownLoadConsolidateFile(id:any){
  let consolidatedFilePath = this.consolidatedFileArray[id]
   this.cmrtservice.downloadconsolidatedFile(consolidatedFilePath).subscribe((Response:any)=>{
-    const filename="ConsolidatedFile.xlsx";
+    const filename="Consolidated_File.xlsx";
     let dataType = Response.type;
     let binaryData:any[] = [];
     binaryData.push(Response);
@@ -277,7 +282,7 @@ getSupplier(SmelterId : any){
         console.log(Allfiledata.length)
         let data :any = {};
         data['Sr_No'] = i+1,
-        data['Smelter_Name'] = Allfiledata[i].Smelter_Name,
+        data['Supplier_Name'] = Allfiledata[i].Supplier_Name,
         data['Smelter_Id_Number'] = Allfiledata[i].Smelter_Id_Number,
         data['Metal'] = Allfiledata[i].Metal;
         this.supplierList.push(data);
