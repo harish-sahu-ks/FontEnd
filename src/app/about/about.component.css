@@ -1,0 +1,27 @@
+body {
+    margin: 0;
+    /* height: 100vh; Set the height of the body to the viewport height */
+    display: flex;
+    justify-content: center; /* Horizontally center content */
+    align-items: center; /* Vertically center content */
+}
+.outer_wall {
+    width: 1000px;
+    background-color: aliceblue;
+    /* margin-top: 50px; */
+    margin-bottom: 50px;
+  
+}
+
+.side_margin {
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+.top_margin {
+    margin-top: 10px;
+}
+
+.red_or_col{
+    color: rgb(250, 80, 18);
+}

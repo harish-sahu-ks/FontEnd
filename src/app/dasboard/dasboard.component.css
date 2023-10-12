@@ -86,3 +86,39 @@ tbody.my-table.body tr.active {
 .head_color {
   color: blue;
 }
+
+.right {
+  float: right;
+  margin-right: 20px;
+  margin-bottom: 5px;
+}
+
+.lft_Margin {
+  /* margin-left: 635px; */
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  margin-right: 200px;
+}
+.field_width {
+  height: 41px;
+}
+
+.search_bar{
+  width: 300px;
+}
+
+.search-left_marg{
+  margin-left: 209px;
+}
+
+.search_status{
+  margin-left: 400px;
+}
+
+.search_type{
+  margin-left: 188px;
+}
+.RefreshBtn{
+  margin-left: 20px;
+}

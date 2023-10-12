@@ -19,7 +19,7 @@
         <div>
           <label for="lastName" style="font-weight: bold;">File to upload: </label>
           <input class="field" id="fileUpload" type="file" name="fileUpload" (change)="changeMultipleFile($event)"
-          accept=".zip" multiple>
+          accept=".zip" >
         </div><br>
         <div *ngIf="isrun">
           <button class="button"  (click)="uploadfile()">Run</button>

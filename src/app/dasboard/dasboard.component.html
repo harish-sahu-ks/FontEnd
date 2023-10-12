@@ -1,6 +1,9 @@
 <div class="font">
   <nav-root></nav-root>
-<h2 class="field_margin font head_color">Dashboard</h2>
+  <h2 class="field_margin font head_color">Dashboard</h2>
+  <div class="right" >
+    <button mat-raised-button  (click)="deleteRow()" class="">Delete</button>
+  </div>
 <div class="col-12 col-md-12">
     <div>
       <table class="my-table">
@@ -59,16 +62,21 @@
     </div>
 </div>
 <br><br>
-    
-<div class="ng-autocomplete">
+<label class="search-left_marg" for="search_Bar">Select Smelter Id*</label>  
+<label class="search_status" for="Status">Select RMI Status*</label>  
+<label class="search_type" for="Type">Select RMI Type*</label>  
+<div class="lft_Margin">
+<!-- <div class="ng-autocomplete"> -->
+  <button class="btn-dark btn RefreshBtn " (click)="pageReload()">Refresh</button>
   <ng-autocomplete
+    class="search_bar"
     [data]="users"
     [searchKeyword]="keyword"
     placeholder="Search Smelter Id"
     (selected)='selectEvent($event)'
     (inputChanged)='onChangeSearch($event)'
     (inputFocused)='onFocused($event)'
-    historyIdentifier="users"
+    historyIdentifier=""
     [itemTemplate]="itemTemplate"
     [notFoundTemplate]="notFoundTemplate">
   </ng-autocomplete>
@@ -88,8 +96,21 @@
   <!-- <span>
      <button type="button" class="btn-color btn">Submit</button>
   </span>   -->
+    <!-- Search By Status -->
+     
+    <select class="field_width" name="Status"  [(ngModel)]="SelectValue">
+      <!-- <option value="">Select RMI Status</option> -->
+      <option  *ngFor = "let status of rmistatus" >{{status}}</option>
+    </select>
+    <!-- search by Type -->
+    &nbsp;&nbsp;
+    <select class="field_width" name="Type" [(ngModel)]="SelectTValue">
+      <!-- <option value="">Select RMI Type</option> -->
+      <option  *ngFor = "let type of rmitype" >{{type}}</option>
+    </select>&nbsp;&nbsp;
+    <button class="btn-dark btn " (click)="datafromRMIstatus()">Search</button>
+  <!-- </div> -->
 </div>
-
 <br>
 
 <form>

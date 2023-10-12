@@ -26,8 +26,13 @@ import { UserDetailComponent } from './user_detail/user_detail.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { DialogComponent } from './dialog/dialog.component';
 import { TokenInterceptor } from './Interceptor/token.interceptor';
-
-
+import { ResgisterComponent } from './resgister/resgister.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { AboutComponent } from './about/about.component';
+import { ContactComponent } from './contact/contact.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import {MatStepperModule} from '@angular/material/stepper';
+import { UserListComponent } from './user-list/user-list.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +43,11 @@ import { TokenInterceptor } from './Interceptor/token.interceptor';
     NavComponent,
     UserDetailComponent,
     DialogComponent,
+    ResgisterComponent,
+    ForgotPasswordComponent,
+    AboutComponent,
+    ContactComponent,
+    UserListComponent,
     
     
     
@@ -63,7 +73,8 @@ import { TokenInterceptor } from './Interceptor/token.interceptor';
     MatTableModule,
     MatCheckboxModule,
     MatPaginatorModule,
-    
+    ReactiveFormsModule,
+    MatStepperModule
     
   ],
   providers: [DatePipe,

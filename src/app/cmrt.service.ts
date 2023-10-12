@@ -111,6 +111,15 @@ deleteuser(data:any){
   console.log(data);
   return this.http.put(`${this.urls}/deleteUserDetail`, data);  
 }
+deleteRowAndGeneratedFile(data:any){
+  return this.http.put(`${this.urls}/deleteGeneratefileanditsDetails`,data);   
+}
+
+postSmelterStatusAndConsolidatedNumber(data :any){
+  console.log(data)
+  let obj = this.http.post(`${this.urls}/statusAndConsolidatedfileNumber`,data);
+  return obj; 
+}
 
 editUserEmail(data:any){
  return this.http.put(`${this.urls}/updateEmail`,data);

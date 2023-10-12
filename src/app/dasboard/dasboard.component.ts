@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, ViewChild, ElementRef,OnInit } from '@angular/core';
+import { Component, AfterViewInit, ViewChild, ElementRef,OnInit, Type } from '@angular/core';
 
 import {CmrtService} from '../cmrt.service';
 import {MatDialog} from '@angular/material/dialog';
@@ -43,14 +43,74 @@ export class DasboardComponent implements OnInit {
   resultExcelData : String[] = [];
   smelterref = '';
   isgetdata : boolean = false;
-  
+  ids : any = ""; 
+  SelectValue :string = '';
+  SelectTValue :string = '';
+  supplierList : any[] = []
+  isusedSearchBar :boolean = false; 
+
+  pageReload(){
+    window.location.reload();
+  }
+
+  datafromRMIstatus(){
+    
+    if(this.isgetdata){
+      let consolidUniqNum = this.consolidatedFileArray[this.ids]
+      let searchedKeyWord = this.SelectValue;
+      let Type = this.SelectTValue;
+      let data = {SearchedKeyWord : searchedKeyWord, Type : Type }
+      // console.log(Type)
+      // console.log(data); 
+      this.cmrtservice.postSmelterStatusAndConsolidatedNumber(data).subscribe((Allfiledata:any)=>{
+        console.log(Allfiledata +" H")
+        while(this.supplierList.length>0){
+          this.supplierList.pop();
+        }
+        let i=0;
+        if(Allfiledata.length>0){
+          for(i=0; i<Allfiledata.length; i++){
+            let data :any = {};
+            data['Sr_No'] = i+1,
+            data['Supplier_Name'] = Allfiledata[i].Supplier_Name,
+            data['Smelter_Id_Number'] = Allfiledata[i].Smelter_Id_Number,
+            data['Metal'] = Allfiledata[i].Metal
+            this.supplierList.push(data);
+            this.smelter_id   = "";
+            this.type         = Type;
+            this.smelter_ref  = "";
+            this.metal        = "";
+            this.country      = "";
+            this.RMI_Status   =searchedKeyWord;
+          }
+        }else{
+
+        }
+      })
+
+    }
+  }
 
   doSearchFieldVacant(abc :any){
     this.sendConsolidatedNumber(abc)
     //  console.log(abc)
      this.isgetdata = true;
      this.onClick(this.smelterref); 
+     this.ids = abc;
+     
   }
+
+  rmistatus:String[] = ["Active","Conformant","Communication Suspended - Not Interested","In Communication","Non Conformant","Not Sure","Outreach Required","RMI Due Diligence Review - Unable to Proceed","Smelter Not Listed In RMI file"];
+  rmitype:string[] = ["High Risk","Low Risk","Medium Risk","Not Found in RMI active /Conformant","Smelter Not Listed In RMI file"];
+  deleteRow(){
+      let consolidUniqNum = this.consolidatedFileArray[this.ids]
+      let resultUniqueNum = this.resultUniqueArray[this.ids]
+      let data = {"consolidUniqNum" : consolidUniqNum, "resultUniqueNum" : resultUniqueNum}
+      this.cmrtservice.deleteRowAndGeneratedFile(data).subscribe((response:any)=>{
+        window.location.reload();
+      })
+  }
+  
   selectEvent(item:any) {
     // do something with selected item
     this.smelterref=item.SmelterRef;
@@ -58,13 +118,29 @@ export class DasboardComponent implements OnInit {
     if(this.isgetdata){
       this.onClick(this.smelterref);
     }
+  
+  this.SelectValue = '';
+  this.SelectTValue = '';
+
   }
   
   onChangeSearch(search: string) {
+    this.SelectValue = '';
+    this.SelectTValue = '';
     // this.keyword =  'smeleterId';
     // fetch remote data from here
     // And reassign the 'data' which is binded to 'data' property.
-    console.log("on change search");
+    console.log(search);
+    if(search.length>=9){
+      // console.log("harish")
+      this.getSupplier(search.toUpperCase());
+    }
+    // this.smelter_id = this.supplierList[0].Smelter_Id_Number;
+    // this.type = this.supplierList[0].Type;
+    // this.smelter_ref = this.supplierList[0].Smelter_Reference;
+    // this.metal = this.supplierList[0].Metal;
+    // this.country = this.supplierList[0].country;
+    // this.RMI_Status = this.supplierList[0].RMI_Status;
   }
 
   onFocused(e:any) {
@@ -80,7 +156,7 @@ export class DasboardComponent implements OnInit {
   ResultFileName : String = "";
   consolidatedFileArray :String[] = [];
   resultUniqueArray :String[] = [];
-
+  
   
   dataSource = new MatTableDataSource(this.user);
   @ViewChild(MatPaginator)
@@ -268,28 +344,45 @@ onClick(Smelter_ref:any){
 });
   
 }
- supplierList : any[] = []
+
+consolidatedUniqueNumber :String = ''
 getSupplier(SmelterId : any){
 //  this.sendConsolidatedNumber()
-  let consolidatedUniqueNumber = this.consolidatedFileArray[this.radiosValue]
-  console.log(consolidatedUniqueNumber);
-  this.cmrtservice.getFilteredSmelterListAndConsolidatedFileUniqueNumber(SmelterId, consolidatedUniqueNumber).subscribe(( Allfiledata :any )=>{
+  this.consolidatedUniqueNumber = this.consolidatedFileArray[this.radiosValue]
+  console.log(this.consolidatedUniqueNumber);
+  this.cmrtservice.getFilteredSmelterListAndConsolidatedFileUniqueNumber(SmelterId, this.consolidatedUniqueNumber).subscribe(( Allfiledata :any )=>{
     
       while(this.supplierList.length>0){
         this.supplierList.pop();
       }
-       for(let i=0; i<Allfiledata.length; i++){
-        console.log(Allfiledata.length)
-        let data :any = {};
-        data['Sr_No'] = i+1,
-        data['Supplier_Name'] = Allfiledata[i].Supplier_Name,
-        data['Smelter_Id_Number'] = Allfiledata[i].Smelter_Id_Number,
-        data['Metal'] = Allfiledata[i].Metal;
-        this.supplierList.push(data);
-        console.log(Allfiledata[i].Smelter_Name);
-        console.log(Allfiledata[i].Smelter_Id_Number);
-        console.log(JSON.stringify(Allfiledata[i]));
-       }
+      let i=0;
+      if(Allfiledata.length>0){
+        for(i=0; i<Allfiledata.length; i++){
+         console.log(Allfiledata.length)
+         let data :any = {};
+         data['Sr_No'] = i+1,
+         data['Supplier_Name'] = Allfiledata[i].Supplier_Name,
+         data['Smelter_Id_Number'] = Allfiledata[i].Smelter_Id_Number,
+         data['Metal'] = Allfiledata[i].Metal,
+         data['RMI_Status'] = Allfiledata[i].RMI_Status,
+         data['Type'] = Allfiledata[i].Type,
+         data['Smelter_Reference'] = Allfiledata[i].Smelter_Reference,
+         data['country'] = Allfiledata[i].country
+         this.supplierList.push(data);
+         console.log("h"+Allfiledata[i].Type);
+         console.log(Allfiledata[i].Smelter_Id_Number);
+         console.log(JSON.stringify(Allfiledata[i]));
+         this.smelter_id = this.supplierList[0].Smelter_Id_Number;
+    this.type = this.supplierList[0].Type;
+    this.smelter_ref = this.supplierList[0].Smelter_Reference;
+    this.metal = this.supplierList[0].Metal;
+    this.country = this.supplierList[0].country;
+    this.RMI_Status = this.supplierList[0].RMI_Status;
+        }
+      }else{
+        //  alert("Selected Smelter Id is not available in Consolidated file !!!")
+        //  window.location.reload();
+      }
     } 
   )}
   // let urlNew = `http://localhost:4000/getFilteredSmelterList/${SmelterId}`;
