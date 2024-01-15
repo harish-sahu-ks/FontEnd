@@ -1,25 +1,31 @@
-body {
-    margin: 0;
+.bg_pic {
+    margin-top: 40px;
     /* height: 100vh; Set the height of the body to the viewport height */
     display: flex;
+    /* background-color: #6daffe; */
     justify-content: center; /* Horizontally center content */
     align-items: center; /* Vertically center content */
 }
+
 .outer_wall {
-    width: 1000px;
-    background-color: aliceblue;
+    width: 1050px;
+    background-color: #f3f4f5;
     /* margin-top: 50px; */
     margin-bottom: 50px;
+    border-radius: 20px;
   
+}
+
+.outer_wall:hover{
+    width: 1050px;
+    background-color: #fcfcfc;
+    /* margin-top: 50px; */
+    margin-bottom: 50px;
 }
 
 .side_margin {
     margin-left: 50px;
     margin-right: 50px;
-}
-
-.top_margin {
-    margin-top: 10px;
 }
 
 .red_or_col{

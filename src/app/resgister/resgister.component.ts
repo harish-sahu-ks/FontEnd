@@ -9,21 +9,42 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./resgister.component.css']
 })
 export class ResgisterComponent implements OnInit{
-
+  EmailId :string = "";
+  supplier_name : string = "";
+  supplier_company : string = "";
+  password : string = "";
+  confirm_password : string = "";
   constructor(private router: Router,
     private cmrtservice:CmrtService){}
   ngOnInit(): void {
   
   }
-  registrationform = new FormGroup({
-    EmailId : new FormControl('',[Validators.required,Validators.email]),
-    supplier_name : new FormControl('',[Validators.required]),
-    supplier_company : new FormControl('',[Validators.required]),
-    password : new FormControl('',[Validators.required,Validators.maxLength(6)]),
-    confirm_password : new FormControl('',[Validators.required])
-  })
   
+  Registered_User :any = []
   registrationUser(){
-         console.log(this.registrationform.value);
+   if(this.EmailId !="" && this.supplier_name !="" && this.supplier_company !=""){
+     if(this.password.length>=6){
+       if(this.password == this.confirm_password){
+         let data = {"EmailId":this.EmailId,
+       "supplier_name":this.supplier_name,
+       "supplier_company":this.supplier_company,
+       "password":this.password 
+     }
+        this.Registered_User.push(data)
+        this.cmrtservice.postUserDetail(data).subscribe((response:any)=>{
+             alert(response)
+        });
+        //  window.location.reload()
+       }
+       else{
+         alert("Repeat Password is Incorrect");
+       }
+     }else{
+       alert("password should be atleat six character")
+     }  
+   }else{
+    alert("Field should not be empty")
+   } 
+    console.log(this.Registered_User);
   }
 }

@@ -1,13 +1,25 @@
-body {
+.most_outer_wall {
     display: flex;
     justify-content: center;
     align-items: center;
+    /* background-color: #6daffe; */
+    margin-top: 40px;
 }
 
 .outer_wall {
-    width: 1000px;
-    height: 590px;
-    background-color: aliceblue;
+    width: 1050px;
+    height: 500px;
+    background-color: #f2f4f6;
+    /* margin-top: 50px; */
+    margin-bottom: 50px;
+    border-radius: 20px;
+  
+}
+
+.outer_wall:hover {
+    width: 1050px;
+    height: 500px;
+    background-color: rgb(255, 255, 255);
     /* margin-top: 50px; */
     margin-bottom: 50px;
   

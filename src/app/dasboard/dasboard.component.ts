@@ -48,7 +48,7 @@ export class DasboardComponent implements OnInit {
   SelectTValue :string = '';
   supplierList : any[] = []
   isusedSearchBar :boolean = false; 
-
+  
   pageReload(){
     window.location.reload();
   }

@@ -11,6 +11,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
 import { UserListComponent } from './user-list/user-list.component';
+import { StatisticComponent } from './statistic/statistic.component';
 
 const routes: Routes = [
   {
@@ -68,6 +69,13 @@ const routes: Routes = [
   component : UserListComponent,
   canActivate:[AuthGuard]
 },
+ 
+{
+  path : 'statistic',
+  component : StatisticComponent,
+  canActivate : [AuthGuard]
+}
+
 ]
 
 @NgModule({

@@ -20,7 +20,6 @@ export class AppComponent implements OnInit {
 constructor(private route: ActivatedRoute, private http : HttpClient, private cmrtservice :CmrtService){this.inProgress=false};
 formdata:FormData = new FormData();
   changeMultipleFile(event:any) {
-    
       let files = event.target.files;
       console.log(files.length);
       const list = []

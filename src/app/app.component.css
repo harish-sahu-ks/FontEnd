@@ -14,8 +14,12 @@
     
     /* height: 100vh; */
     height: auto;
+    /* background-color: rgb(232, 232, 232); */
+    background-color:  rgb(232, 232, 232);
     /* height: 100%; */
-    background:rgb(207, 252, 252);
+    /* background-color: rgb(4, 182, 252); */
+    /* background-color: #6daffe; */
+    /* background-image:url("../assets/img/sky.png"); */
    /* position: absolute;
    top: 50%;
    left: 50%;

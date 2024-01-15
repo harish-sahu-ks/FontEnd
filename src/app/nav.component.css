@@ -3,13 +3,33 @@
  }
 
 .field_margin {
-    margin-left: 16px;
+    margin-left: 40px;
 } 
+
+.field_margin_logo {
+  margin-left: 16px;
+}
  
 .font {
     font-family: Lato;
   }
 
   .margin{
-    margin-left: 900px;
+    margin-left: 700px;
+  }
+
+  .bg-blue {
+    background-color: blue;
+  }
+
+  .active_color {
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    
+  }
+
+  .nav_bar {
+    height: 50px;
+    color: white;
   }

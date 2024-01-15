@@ -1,13 +1,19 @@
 <nav-root></nav-root><br>
 <form action="/action_page.php">
-    <label for="uploadExcelFile" style="font-weight: bold; font-family: Lato;">File to upload : </label>&nbsp;
-    <input  type="file" id="uploadExcelFile" name="filename" (change)="changeUserDetailFile($event)">
+  <div class="flex_box">
+    <div>
+      <label for="uploadExcelFile" style="font-weight: bold; font-family: Lato;">File to upload : </label>&nbsp;
+      <input  type="file" id="uploadExcelFile" name="filename" (change)="changeUserDetailFile($event)">
+    </div>
     <!-- <input class="button" type="submit"> -->
-    <button mat-raised-button class="font button" (click)="uploadfile()" [disabled]="isFileSelect">Submit</button> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-    <label for="uploadExcelFile" style="font-weight: bold; font-family: Lato;">Delete Checked Row : </label>&nbsp;&nbsp; &nbsp; 
-    <button mat-raised-button class="font button" (click)="deleteCheckedRow()" [disabled]="isChecked">Delete</button> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  
-    <label for="reInitiate" style="font-weight: bold; font-family: Lato;">Reinitiate Checked Row : </label>&nbsp;&nbsp; &nbsp; 
-    <button mat-raised-button class="font button" (click)="mailResendTocheckedUser()" [disabled]="isChecked">Reinitiate</button>  
+    <div>
+      <button mat-raised-button class="font button" (click)="uploadfile()" [disabled]="isFileSelect">Submit</button> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+      <label for="uploadExcelFile" style="font-weight: bold; font-family: Lato;">Delete Checked Row : </label>&nbsp;&nbsp; &nbsp; 
+      <button mat-raised-button class="font button" (click)="deleteCheckedRow()" [disabled]="isChecked">Delete</button> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  
+      <label for="reInitiate" style="font-weight: bold; font-family: Lato;">Reinitiate Checked Row : </label>&nbsp;&nbsp; &nbsp; 
+      <button mat-raised-button class="font button" (click)="mailResendTocheckedUser()" [disabled]="isChecked">Reinitiate</button>  
+    </div>
+  </div>
 </form><br>
 
 <table class="my-table">

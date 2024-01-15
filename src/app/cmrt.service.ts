@@ -20,6 +20,10 @@ export class CmrtService {
     //alert("2")
     return var1;
 }
+postUserDetail(Data:Object){
+  //  console.log(Data);
+   return this.http.post(`${this.urls}/postuserDetail`,Data);
+}
 
 mailReinitiate(data:any){
  return this.http.post(`${this.urls}/reinitiateEmali`,data);
@@ -77,6 +81,16 @@ filesExternalDetail(Data: any) {
 
 postConsolidatedFileNumber(Data: any) {
   return this.http.post(`${this.urls}/getConsolidatedFileNumber/${Data}`, "");
+}
+
+getTypeStatusCount():Observable<any>{   
+     return this.http.get(`${this.urls}/getconsolidatedfiledataforcolumnchart`);
+}
+getmetalCountwithRmiStatus():Observable<any>{
+  return this.http.get(`${this.urls}/getMetalcountwithRmiStatus`);
+}
+getRMIStatusCount():Observable<any>{
+   return this.http.get(`${this.urls}/getconsolidatedfiledataforhorizontalchart`);
 }
  
  getFilteredSmelterListAndConsolidatedFileUniqueNumber(SmelterId:any, ConsolidatedFileNumber:any){

@@ -2,10 +2,36 @@
     display:block;
     margin:0 auto;
    }
+   .head_colur {
+    color : black;
+    font-size: 22px;
+    border-radius: 20px;
+   }
+
+   .border_rad{
+    border-radius: 20px;
+   }
+
+  
+
+   .mar_left{
+    margin-left: 114px;
+   }
+
+   .mar_left1{
+    margin-left: 8px;
+   }
 
    .flex-container {
     display: flex;
     flex-wrap: nowrap;
+    /* background-color: DodgerBlue; */
+  }
+
+  .flex-container1 {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
     /* background-color: DodgerBlue; */
   }
 
@@ -26,11 +52,12 @@
   }
 
   .btn-color {
-    background-color: rgb(90, 88, 247);
+    /* background-color: rgb(90, 88, 247); */
+    background-color: rgb(197, 197, 197)
   }
 
   .btn-margin {
-    margin-left: 510px;
+    margin-left: 705px;
   }
 
   .btn-rad {
@@ -46,6 +73,7 @@
 
   .field_margin {
     margin-left: 16px;
+    margin-top: 2px;
 } 
  
 table.my-table {
@@ -56,18 +84,20 @@ table.my-table {
 }
 
 thead.my-table.headers tr th {
-  border: white solid 3px;
-  background-color: darkblue;
-  color: white;
+  /* border: rgb(249, 249, 251) solid 2px; */
+  background-color: rgb(220, 220, 220);
+  /* border-radius: 20px; */
+  color: black;
   height: 40px;
   font-family: Lato;
 }
 
   
 tbody.my-table.body tr td {
-  border: black solid 1px;
+  border: white solid 1px;
   border-left: none;
   height: 25px;
+  
 }
 
 tbody.my-table.body tr td.last {
@@ -83,13 +113,14 @@ tbody.my-table.body tr.active {
   font-family: Lato;
 }
 
-.head_color {
+.head_color:focus {
   color: blue;
+
 }
 
 .right {
   float: right;
-  margin-right: 20px;
+  margin-right: 15px;
   margin-bottom: 5px;
 }
 
@@ -102,23 +133,69 @@ tbody.my-table.body tr.active {
 }
 .field_width {
   height: 41px;
+  box-shadow: 0 4px 2px -2px rgba(0, 0, 0, 0.2);
+  border-width: 0px;
+  border-radius: 20px;
 }
 
 .search_bar{
   width: 300px;
+  
 }
 
 .search-left_marg{
-  margin-left: 209px;
+  margin-left: 97px;
+  
 }
 
 .search_status{
-  margin-left: 400px;
+  margin-left: 288px;
 }
 
 .search_type{
-  margin-left: 188px;
+  margin-left: 204px;
 }
 .RefreshBtn{
   margin-left: 20px;
 }
+
+.changecolor:focus {
+  color:blue;
+}
+
+body{
+  /* background-image:url("../../assets/img/sky.png"); */
+  /* background-color: black; */
+  
+}
+.box_container{
+  margin: auto;
+  width:80%;
+  height: auto;
+  background-color: rgb(241, 241, 241);
+  align-items: center;
+  border-radius: 20px;
+}
+
+.box_container1{
+  margin: auto;
+  width:80%;
+  height: 15vh;
+  background-color: rgb(241, 241, 241);
+  align-items: center;
+  border-radius: 20px;
+}
+
+.box_container2{
+  margin: auto;
+  width:80%;
+  height: 28vh;
+  background-color: rgb(241, 241, 241);
+  align-items: center;
+  border-radius: 20px;
+}
+
+
+
+
+

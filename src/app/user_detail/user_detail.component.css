@@ -53,5 +53,8 @@ tbody.my-table.body tr td {
     background-color: gainsboro;
     cursor: pointer;
   }
+  .flex_box{
+    flex: auto;
+  }
 
   

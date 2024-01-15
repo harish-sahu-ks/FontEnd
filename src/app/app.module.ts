@@ -33,6 +33,10 @@ import { ContactComponent } from './contact/contact.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatStepperModule} from '@angular/material/stepper';
 import { UserListComponent } from './user-list/user-list.component';
+import { StatisticComponent } from './statistic/statistic.component';
+import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
+
+
 
 @NgModule({
   declarations: [
@@ -48,6 +52,9 @@ import { UserListComponent } from './user-list/user-list.component';
     AboutComponent,
     ContactComponent,
     UserListComponent,
+    StatisticComponent,
+    
+    
     
     
     
@@ -74,7 +81,14 @@ import { UserListComponent } from './user-list/user-list.component';
     MatCheckboxModule,
     MatPaginatorModule,
     ReactiveFormsModule,
-    MatStepperModule
+    MatStepperModule,
+    CanvasJSAngularChartsModule,
+    BrowserModule,
+
+
+    
+     
+
     
   ],
   providers: [DatePipe,
